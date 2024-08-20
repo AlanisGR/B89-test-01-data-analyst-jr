@@ -11,7 +11,7 @@ INNER JOIN merchant as m on
 	r.id_merchant = m.id_merchant
 WHERE
 	EXTRACT(MONTH FROM r.fecha_recibido) = EXTRACT(MONTH FROM CURDATE() - INTERVAL 1 MONTH)
-	AND UPPER (r.estado_remesa) LIKE 'DENEGADO'
+	AND r.estado_remesa = 'DENEGADO'
 GROUP BY
 	m.id_merchant,
 	m.razon_social,
