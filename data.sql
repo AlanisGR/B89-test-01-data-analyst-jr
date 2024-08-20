@@ -1,13 +1,9 @@
-insert into clientes(nombres,tipo_documento,num_documento,email,telefono,cta_bancaria,usuario_creacion)
-values ('JORGE HERNAN DAVILA VALDIVIEZO','PASAPORTE','A12345678B','JHDAVILA@GMAIL.COM','9015748896','00345645678912340000','user01'),
-('JUAN ALBERTO PEREZ MACNO','DNI','12345678','JPEREZ@HOTMAIL.COM','963258741','12345645678912345698','user01'),
-('MICHELL AGUSTIN BENITEZ CORRAL','DNI','87654321','MBENITEZ@HOTMAIL.COM','963254444','12345645678912000000','user01'),
-('ROSA GAVILANO FUENTES','DNI','55588812','RGAVILANO@GMAIL.COM','015743512','74185296317894561233','user01');
+INSERT INTO merchant(razon_social,usuario_creacion) 
+VALUES 
+("INCAK S.A.C","USER1"),
+("PEPITOS S.A.C","USER1"),
+("HAVRL S.A.C","USER1");
 
-insert into remesas(tipo_moneda,monto,cliente_beneficiario_id,cliente_remitente_id,estado_remesa,usuario_creacion)
-values ('SOLES',1585080.99,1,3,'CREADO','user01'),
-('EUROS',888888.58,3,2,'EN VALIDACIÓN','user01'),
-('DOLAR',90008.95,2,1,'APROBADO','user01'),
-('SOLES',888855.18,2,4,'DENEGADO','user01');
-
-
+CALL sp_insertar_remesa(1,'SOLES', 1500, '2024-01-10 13:00', 'JUAN PEREZ', 'DNI', '41256398', 'jperez@gmail.com', '985632211',  '110023654855','ANA DIAZ', 'DNI', '25698866', 'adiaz@gmail.com', '875236991','USER01');
+CALL sp_insertar_remesa(2,'EUROS', 10500, '2024-07-10 13:15','MARIA TORRES PALOMINO', 'DNI', '123456000', 'mtorres@gmail.com', '987654321', '123456789012','ANGEL DIAZ RAMOS', 'DNI', '55698866', 'adiazr@gmail.com', '975236991','USER01');
+CALL sp_insertar_remesa(3,'EUROS', 19970.50, '2024-08-01 13:15','JORGE HERNAN DAVILA VALDIVIEZO','PASAPORTE','A12345678B','JHDAVILA@@gmail.com','9015748896','00345645678912340000','ANGEL DIAZ RAMOS', 'DNI', '55698866', 'adiazr@gmail.com', '975236991','USER01');

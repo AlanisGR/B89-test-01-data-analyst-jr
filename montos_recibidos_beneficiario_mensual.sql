@@ -1,15 +1,83 @@
 SELECT
-    r.cliente_beneficiario_id,
-    c.nombres AS Beneficiario,
-    DATE_FORMAT(r.fecha_hora_envio, '%m-%Y') AS mes_anio,
-    r.estado_remesa,
-    SUM(r.monto) AS monto_total_recibido
+	r.beneficiario_nombres as beneficiario,
+	r.estado_remesa,
+	SUM(
+		CASE WHEN DATE_FORMAT(r.fecha_envio, '%m') = '01' 
+			THEN r.monto 
+			ELSE 0 
+		END
+		) AS montos_enero,
+	SUM(
+		CASE WHEN DATE_FORMAT(r.fecha_envio, '%m') = '02' 
+			THEN r.monto 
+			ELSE 0 
+		END
+		) AS montos_febrero,
+	SUM(
+		CASE WHEN DATE_FORMAT(r.fecha_envio, '%m') = '03' 
+			THEN r.monto 
+			ELSE 0 
+		END
+		) AS montos_marzo,
+	SUM(
+		CASE WHEN DATE_FORMAT(r.fecha_envio, '%m') = '04' 
+			THEN r.monto 
+			ELSE 0 
+		END
+		) AS montos_abril,
+	SUM(
+		CASE WHEN DATE_FORMAT(r.fecha_envio, '%m') = '05' 
+			THEN r.monto 
+			ELSE 0 
+		END
+		) AS montos_mayo,
+	SUM(
+		CASE WHEN DATE_FORMAT(r.fecha_envio, '%m') = '06' 
+			THEN r.monto 
+			ELSE 0 
+		END
+		) AS montos_junio,
+	SUM(
+		CASE WHEN DATE_FORMAT(r.fecha_envio, '%m') = '07' 
+			THEN r.monto 
+			ELSE 0 
+		END
+		) AS montos_julio,
+	SUM(
+		CASE WHEN DATE_FORMAT(r.fecha_envio, '%m') = '08' 
+			THEN r.monto 
+			ELSE 0 
+		END
+		) AS montos_agosto,
+	SUM(
+		CASE WHEN DATE_FORMAT(r.fecha_envio, '%m') = '09' 
+			THEN r.monto 
+			ELSE 0 
+		END
+		) AS montos_septiembre,
+	SUM(
+		CASE WHEN DATE_FORMAT(r.fecha_envio, '%m') = '10' 
+			THEN r.monto 
+			ELSE 0 
+		END
+		) AS montos_octubre,
+	SUM(
+		CASE WHEN DATE_FORMAT(r.fecha_envio, '%m') = '11' 
+			THEN r.monto 
+			ELSE 0 
+		END
+		) AS montos_noviembre,
+	SUM(
+		CASE WHEN DATE_FORMAT(r.fecha_envio, '%m') = '12' 
+			THEN r.monto 
+			ELSE 0 
+		END
+		) AS montos_diciembre
 FROM
-    remesas r
-INNER JOIN clientes c ON r.cliente_remitente_id = c.id_cliente
+	remesas r
 WHERE
-r.estado_remesa LIKE 'ENTREGADO'
+	YEAR(r.fecha_envio) = YEAR(CURDATE())
+	AND r.estado_remesa = 'ENTREGADO'
 GROUP BY
-    r.cliente_beneficiario_id, c.nombres, DATE_FORMAT(r.fecha_hora_envio, '%m-%Y'),r.estado_remesa
-ORDER BY
-    mes_anio, r.cliente_beneficiario_id;
+	r.beneficiario_nombres,
+	r.estado_remesa;
